@@ -4,6 +4,12 @@ import time
 import random
 
 pygame.font.init()
+pygame.mixer.init()
+
+player_vel = 5  # Adjust the velocity as needed
+lost_font = pygame.font.SysFont("sans serif", 50)
+FPS = 60  # Set the desired frames per second
+lives = 3
 
 WIDTH, HEIGHT = 750, 750
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -25,6 +31,11 @@ POWER_UP_IMG = pygame.image.load(os.path.join("assets", "power_up.png"))
 BG = pygame.transform.scale(pygame.image.load(os.path.join("assets", "background-black.jpg")), (WIDTH, HEIGHT))
 
 
+pygame.mixer.music.load(os.path.join("assets", "background_music.wav"))
+laser_sound = pygame.mixer.Sound(os.path.join("assets", "laser_sound.wav"))
+
+pygame.mixer.music.play(-1)
+
 class Laser:
     def __init__(self, x, y, img):
         self.x = x
@@ -43,7 +54,6 @@ class Laser:
 
     def collision(self, obj):
         return collide(obj, self)
-
 
 class Ship:
     COOLDOWN = 30
@@ -83,13 +93,13 @@ class Ship:
             laser = Laser(self.x, self.y, self.laser_img)
             self.lasers.append(laser)
             self.cool_down_counter = 1
+            laser_sound.play()
 
     def get_width(self):
         return self.ship_img.get_width()
 
     def get_height(self):
         return self.ship_img.get_height()
-
 
 class Player(Ship):
     def __init__(self, x, y, health=100):
@@ -122,7 +132,6 @@ class Player(Ship):
         pygame.draw.rect(window, (0, 255, 0), (self.x, self.y + self.ship_img.get_height() + 10,
                                               self.ship_img.get_width() * (self.health / self.max_health), 10))
 
-
 class Enemy(Ship):
     COLOR_MAP = {
         "red": (RED_SPACE_SHIP, RED_LASER),
@@ -143,7 +152,6 @@ class Enemy(Ship):
             self.lasers.append(laser)
             self.cool_down_counter = 1
 
-
 class PowerUp:
     def __init__(self, x, y, img):
         self.x = x
@@ -163,12 +171,10 @@ class PowerUp:
     def collision(self, obj):
         return collide(obj, self)
 
-
 def collide(obj1, obj2):
     offset_x = obj2.x - obj1.x
     offset_y = obj2.y - obj1.y
     return obj1.mask.overlap(obj2.mask, (offset_x, offset_y)) is not None
-
 
 def main():
     run = True
@@ -301,4 +307,4 @@ def main_menu():
     pygame.quit()
 
 
-main_menu()
+main_menu() 
