@@ -298,7 +298,7 @@ def main():
 
 def main_menu():
     title_font = pygame.font.SysFont("sans serif", 50)
-    sound_font = pygame.font.SysFont("sans serif", 32)
+    sound_font = pygame.font.SysFont("sans serif", 30)
     run = True
     music_playing = True
     TOGGLE_MUSIC_EVENT = pygame.USEREVENT + 1
