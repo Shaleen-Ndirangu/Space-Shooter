@@ -1,13 +1,13 @@
 @echo off
 
-:: Check for administrator privileges
-NET SESSION >nul 2>&1
-if %errorLevel% == 0 (
-    echo Administrator privileges detected. Running with elevated permissions.
-) else (
-    echo Requesting administrator privileges...
-    goto UACPrompt
-)
+:: Make the script to run as administrator automatically
+if "%1"=="ELEV" (goto gotAdmin)
+set "batchPath=%~0"
+set "batchArgs=ELEV"
+echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\OEgetPriv.vbs"
+echo UAC.ShellExecute "%batchPath%", "%batchArgs%", "", "runas", 1 >> "%temp%\OEgetPriv.vbs"
+"%temp%\OEgetPriv.vbs"
+
 
 :: Change directory to the script's directory
 cd /d %~dp0
@@ -29,3 +29,14 @@ python "main.py"
 :: Deactivate the virtual environment
 deactivate
 
+:: Pause the script
+@REM REM Pause to keep the console window open
+@REM pause
+@REM goto :EOF
+
+@REM :UACPrompt
+@REM     echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\getadmin.vbs"
+@REM     echo UAC.ShellExecute "cmd.exe", "/C %~s0 %*", "", "runas", 1 >> "%temp%\getadmin.vbs"
+@REM     "%temp%\getadmin.vbs"
+@REM     del "%temp%\getadmin.vbs"
+@REM     goto :EOF
