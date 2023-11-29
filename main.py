@@ -3,6 +3,8 @@ import os
 import time
 import random
 
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
 pygame.font.init()
 pygame.mixer.init()
 
@@ -306,5 +308,5 @@ def main_menu():
                 main()
     pygame.quit()
 
-
-main_menu() 
+if __name__ == "__main__":
+    main_menu()

@@ -5,22 +5,27 @@ NET SESSION >nul 2>&1
 if %errorLevel% == 0 (
     echo Administrator privileges detected. Running with elevated permissions.
 ) else (
-    echo Please run this script as an administrator.
-    pause
-    exit /b
+    echo Requesting administrator privileges...
+    goto UACPrompt
 )
 
-:: Replace 'env' with the name of your virtual environment
-python -m venv env
+:: Change directory to the script's directory
+cd /d %~dp0
 
-:: Replace 'env' with the name of your virtual environment
-env\Scripts\activate
 
-:: Replace 'requirements.txt' with the name of your requirements file
-pip install -r requirements.txt
-
-:: Replace 'your_script.py' with the name of your Python file
-python main.py
+:: Check if there is an environment already present, if there is one skip the command,else Create a virtual environment
+if exist env (
+    echo Virtual environment already exists. Skipping creation.
+    venv\Scripts\activate
+) else (
+    echo Creating virtual environment...
+    python -m venv env
+    venv\Scripts\activate
+    pip install -r requirements.txt
+) 
+:: Run the Python script
+python "main.py"
 
 :: Deactivate the virtual environment
-deactivate 
+deactivate
+
