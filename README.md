@@ -35,7 +35,7 @@ In this section, we'll guide you through the process of adding lives to the game
 - [Any additional controls]
 
 ## Game Architecture
-- The game is amde up of enemy spaceships and fighter spaceships.
+- The game is made up of enemy spaceships and fighter spaceships.
 - The fighter spaceships shoots lasers to kill the enemy spaceships in order to advance in the vaious levels in the game.
 - The fighter spaceships are able to collect lives along the way in order to stay alive in the game.
 
