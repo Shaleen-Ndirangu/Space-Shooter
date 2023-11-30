@@ -29,10 +29,15 @@ In this section, we'll guide you through the process of adding lives to the game
 - Use the key "space" to shoot
 
 ## Controls
-- *Move Left*: [Specify key/button]
-- *Move Right*: [Specify key/button]
-- *Shoot*: [Specify key/button]
-- [Any additional controls]
+- *Start game*: [ENTER]
+- *Move Left*: [A]
+- *Move Right*: [D]
+- *Move Forward*: [W]
+- *Move Backward*: [S]
+- *Shoot*: [SPACE]
+
+
+
 
 ## Game Architecture
 - Explain the overall architecture of your game, including key components and their interactions.
