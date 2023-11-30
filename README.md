@@ -43,7 +43,7 @@ In this section, we'll guide you through the process of adding lives to the game
 - List and credit any external assets used in the game (e.g., images, sounds, etc.).
 
 ## Contributing
-If you'd like to contribute to the project, please follow the [contribution guidelines](CONTRIBUTING.md).
+If you'd like to contribute to the project and make it better, your help is very welcome.
 
 ## License
 This project is licensed under the [License Name] - see the [LICENSE.md](LICENSE.md) file for details.
