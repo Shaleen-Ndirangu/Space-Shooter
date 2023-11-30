@@ -32,6 +32,9 @@ deactivate
 :: Pause the script
 @REM REM Pause to keep the console window open
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 60819847d07c946ac621ba1e538d7784eb93460b
 pause
 goto :EOF
 
@@ -41,6 +44,7 @@ goto :EOF
     "%temp%\getadmin.vbs"
     del "%temp%\getadmin.vbs"
     goto :EOF
+<<<<<<< HEAD
 =======
 @REM pause
 @REM goto :EOF
@@ -52,3 +56,5 @@ goto :EOF
 @REM     del "%temp%\getadmin.vbs"
 @REM     goto :EOF
 >>>>>>> 555d6693377969c70d0e4e6ae962d582f69a2c26
+=======
+>>>>>>> 60819847d07c946ac621ba1e538d7784eb93460b
