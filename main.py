@@ -2,6 +2,9 @@ import pygame
 import os
 import time
 import random
+import sys
+
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 pygame.font.init()
 pygame.mixer.init()
@@ -29,6 +32,7 @@ YELLOW_LASER = pygame.image.load(os.path.join("assets", "pixel_laser_yellow.png"
 POWER_UP_IMG = pygame.image.load(os.path.join("assets", "power_up.png"))
 
 BG = pygame.transform.scale(pygame.image.load(os.path.join("assets", "background-black.jpg")), (WIDTH, HEIGHT))
+
 
 
 pygame.mixer.music.load(os.path.join("assets", "background_music.wav"))
@@ -178,6 +182,7 @@ def collide(obj1, obj2):
 
 def main():
     run = True
+    
     FPS = 60
     level = 0
     lives = 5
@@ -293,18 +298,46 @@ def main():
 
 def main_menu():
     title_font = pygame.font.SysFont("sans serif", 50)
+    sound_font = pygame.font.SysFont("sans serif", 30)
     run = True
+    music_playing = True
+    TOGGLE_MUSIC_EVENT = pygame.USEREVENT + 1
+
     while run:
         WIN.blit(BG, (0, 0))
-        title_label = title_font.render("Press any button to start :)", 1, (255, 255, 255))
+        title_label = title_font.render("Press the ENTER button to start :", 1, (255, 255, 255))
+        sound_label = sound_font.render("Press the M button to turn on or off the sound", 1, (255, 255, 255))
+        menu_text = "Music: ON" if music_playing else "Music: OFF"
+        menu_label = sound_font.render(menu_text, 1, (255, 255, 255))
+        WIN.blit(menu_label, (WIDTH - menu_label.get_width() - 10, 10))
         WIN.blit(title_label, (WIDTH / 2 - title_label.get_width() / 2, 350))
+        WIN.blit(sound_label, (WIDTH / 2 - sound_label.get_width() / 2, 400))
         pygame.display.update()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                main()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    run = False
+                elif event.key == pygame.K_m:
+                    # Toggle music on 'M' key press
+                    music_playing = not music_playing
+                    if music_playing:
+                        pygame.mixer.music.unpause()
+                    else:
+                        pygame.mixer.music.pause()
+                elif event.key == pygame.K_RETURN:
+                    main()
+            elif event.type == TOGGLE_MUSIC_EVENT:
+                # Toggle music state
+                music_playing = not music_playing
+                if music_playing:
+                    pygame.mixer.music.unpause()
+                else:
+                    pygame.mixer.music.pause()
+                              
+            
     pygame.quit()
 
-
-main_menu() 
+if __name__ == "__main__":
+    main_menu()
