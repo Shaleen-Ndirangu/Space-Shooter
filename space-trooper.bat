@@ -31,12 +31,12 @@ deactivate
 
 :: Pause the script
 @REM REM Pause to keep the console window open
-@REM pause
-@REM goto :EOF
+pause
+goto :EOF
 
-@REM :UACPrompt
-@REM     echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\getadmin.vbs"
-@REM     echo UAC.ShellExecute "cmd.exe", "/C %~s0 %*", "", "runas", 1 >> "%temp%\getadmin.vbs"
-@REM     "%temp%\getadmin.vbs"
-@REM     del "%temp%\getadmin.vbs"
-@REM     goto :EOF
+:UACPrompt
+    echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\getadmin.vbs"
+    echo UAC.ShellExecute "cmd.exe", "/C %~s0 %*", "", "runas", 1 >> "%temp%\getadmin.vbs"
+    "%temp%\getadmin.vbs"
+    del "%temp%\getadmin.vbs"
+    goto :EOF

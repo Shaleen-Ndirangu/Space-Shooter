@@ -106,12 +106,13 @@ class Ship:
         return self.ship_img.get_height()
 
 class Player(Ship):
-    def __init__(self, x, y, health=100):
+    def __init__(self, x, y, health=100, score=0,):
         super().__init__(x, y, health)
         self.ship_img = YELLOW_SPACE_SHIP
         self.laser_img = YELLOW_LASER
         self.mask = pygame.mask.from_surface(self.ship_img)
         self.max_health = health
+        self.score = score
 
     def move_lasers(self, vel, objs):
         self.cooldown()
@@ -123,6 +124,7 @@ class Player(Ship):
                 for obj in objs:
                     if laser.collision(obj):
                         objs.remove(obj)
+                        self.score += 10
                         if laser in self.lasers:
                             self.lasers.remove(laser)
 
@@ -181,13 +183,13 @@ def collide(obj1, obj2):
     return obj1.mask.overlap(obj2.mask, (offset_x, offset_y)) is not None
 
 def main():
-    run = True
-    
+    run = True 
     FPS = 60
     level = 0
     lives = 5
     main_font = pygame.font.SysFont("sans serif", 20)
     lost_font = pygame.font.SysFont("sans serif", 70)
+    score_font = pygame.font.SysFont("sans serif", 50)
     player_vel = 5
     enemies = []
     enemy_vel = 1
@@ -207,9 +209,11 @@ def main():
         WIN.blit(BG, (0, 0))
         lives_label = main_font.render(f"Lives: {lives}", 1, (255, 255, 255))
         level_label = main_font.render(f"Level: {level}", 1, (255, 255, 255))
+        score_label = main_font.render(f"score: {player.score}", 1, (255, 255, 255))
 
         WIN.blit(lives_label, (10, 10))
         WIN.blit(level_label, (WIDTH - level_label.get_width() - 10, 10))
+        WIN.blit(score_label, (WIDTH - score_label.get_width() - 10, 40))
 
         for enemy in enemies:
             enemy.draw(WIN)
@@ -221,7 +225,9 @@ def main():
 
         if lost:
             lost_label = lost_font.render("GAME OVER!!!", 1, (255, 255, 255))
+            final_score = score_font.render(f"Your final score: {player.score}", 1, (255, 255, 255))
             WIN.blit(lost_label, (WIDTH / 2 - lost_label.get_width() / 2, 350))
+            WIN.blit(final_score,(WIDTH / 2 - lost_label.get_width() / 2, 450))
 
         pygame.display.update()
 
