@@ -24,6 +24,9 @@ In this section, we'll guide you through the process of adding lives to the game
 
 ### How to Play
 - [Provide instructions on how to start and play the game]
+- Press Enter to start the game
+- Use the keys "w,s,a,d" to move up, down, left and right respectively
+- Use the key "space" to shoot
 
 ## Controls
 - *Move Left*: [Specify key/button]
