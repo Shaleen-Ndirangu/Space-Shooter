@@ -183,12 +183,7 @@ def collide(obj1, obj2):
     return obj1.mask.overlap(obj2.mask, (offset_x, offset_y)) is not None
 
 def main():
-<<<<<<< HEAD
     run = True 
-=======
-    run = True
-    
->>>>>>> 555d6693377969c70d0e4e6ae962d582f69a2c26
     FPS = 60
     level = 0
     lives = 5
