@@ -183,7 +183,7 @@ def collide(obj1, obj2):
     return obj1.mask.overlap(obj2.mask, (offset_x, offset_y)) is not None
 
 def main():
-    run = True 
+    running = True 
     FPS = 60
     level = 0
     lives = 5
@@ -231,7 +231,7 @@ def main():
 
         pygame.display.update()
 
-    while run:
+    while running:
         clock.tick(FPS)
         redraw_window()
 
@@ -241,7 +241,7 @@ def main():
 
         if lost:
             if lost_count > FPS * 3:
-                run = False
+                running = False
             else:
                 continue
 
@@ -261,7 +261,7 @@ def main():
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                run = False
+                running = False
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_a] and player.x + player_vel > 0:
@@ -305,11 +305,11 @@ def main():
 def main_menu():
     title_font = pygame.font.SysFont("sans serif", 50)
     sound_font = pygame.font.SysFont("sans serif", 30)
-    run = True
+    running = True
     music_playing = True
     TOGGLE_MUSIC_EVENT = pygame.USEREVENT + 1
 
-    while run:
+    while running:
         WIN.blit(BG, (0, 0))
         title_label = title_font.render("Press the ENTER button to start :", 1, (255, 255, 255))
         sound_label = sound_font.render("Press the M button to turn on or off the sound", 1, (255, 255, 255))
@@ -321,10 +321,10 @@ def main_menu():
         pygame.display.update()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                run = False
+                running = False
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    run = False
+                    running = False
                 elif event.key == pygame.K_m:
                     # Toggle music on 'M' key press
                     music_playing = not music_playing
