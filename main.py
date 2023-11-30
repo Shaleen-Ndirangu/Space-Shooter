@@ -304,7 +304,7 @@ def main_menu():
                 run = False
             if event.type == pygame.MOUSEBUTTONDOWN:
                 main()
-    pygame.quit()
+   pygame.quit()
 
 
 main_menu() 
