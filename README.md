@@ -20,10 +20,13 @@ In this section, we'll guide you through the process of adding lives to the game
 ### Installation
 1. Clone the repository: git clone https://github.com/yourusername/space-shooter.git
 2. Navigate to the project directory: cd space-shooter
-3. [Additional installation steps, if any]
+3. Double click on the space shooter script file
 
 ### How to Play
 - [Provide instructions on how to start and play the game]
+- Press Enter to start the game
+- Use the keys "w,s,a,d" to move up, down, left and right respectively
+- Use the key "space" to shoot
 
 ## Controls
 - *Move Left*: [Specify key/button]
